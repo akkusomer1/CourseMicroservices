@@ -7,7 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{06
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{033BA9B6-F031-4995-B648-D677A1FDC909}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseMicroservices.Services.Catalog", "Services\Catalog\CourseMicroservices.Services.Catalog\CourseMicroservices.Services.Catalog.csproj", "{06C823FD-6FFC-4DC1-96F0-824520CCBF8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseMicroservices.Services.Catalog", "Services\Catalog\CourseMicroservices.Services.Catalog\CourseMicroservices.Services.Catalog.csproj", "{06C823FD-6FFC-4DC1-96F0-824520CCBF8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1D55BBE4-5DC1-4A02-A329-DA2C9CF6BB59}"
+	ProjectSection(SolutionItems) = preProject
+		Port.txt = Port.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
