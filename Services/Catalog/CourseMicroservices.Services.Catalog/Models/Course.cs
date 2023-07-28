@@ -26,10 +26,10 @@ namespace CourseMicroservices.Services.Catalog.Models
 
 
         [BsonRepresentation(BsonType.ObjectId)]
-        public string CateogryId { get; set; }
+        public string CategoryId { get; set; }
 
         [BsonIgnore]
-        public Category Cateogory { get; set; }
+        public Category Category { get; set; }
     }
 }
 
