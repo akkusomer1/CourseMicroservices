@@ -1,10 +1,12 @@
+using CourseMicroservices.Services.Catalog.Interfaces;
+using CourseMicroservices.Services.Catalog.Services;
 using CourseMicroservices.Services.Catalog.Settings;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.Configure<DatabaseSettnings>(builder.Configuration.GetSection(nameof(DatabaseSettnings)));
 
