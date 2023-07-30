@@ -28,7 +28,7 @@ namespace CourseMicroservices.Services.Catalog.Controllers
         }
 
 
-        [HttpGet("{userId}")]
+        [HttpGet("[action]/{userId}")]
         public async Task<IActionResult> GetAllByUserId(string userId)
         {
             return CreateActionResult(await _courseService.GetAllByUserIdAsync(userId));

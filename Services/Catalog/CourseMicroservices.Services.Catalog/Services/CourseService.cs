@@ -18,13 +18,13 @@ namespace CourseMicroservices.Services.Catalog.Services
 
         public CourseService(IDatabaseSettnings databaseSettnings, IMapper mapper)
         {
+            _databaseSettnings = databaseSettnings;
             var client = new MongoClient(_databaseSettnings!.ConnectionStrings);
-
             var database = client.GetDatabase(_databaseSettnings.DatabaseName);
             _courseCollection = database.GetCollection<Course>(_databaseSettnings.CourseCollectionName);
             _categoryCollection = database.GetCollection<Category>(_databaseSettnings.CategoryCollectionName);
 
-            _databaseSettnings = databaseSettnings;
+
             _mapper = mapper;
         }
 

@@ -12,6 +12,5 @@ namespace CourseMicroservices.Services.Catalog.Dtos.Course
         public string Description { get; set; }
         public FeatureDto Feature { get; set; }
         public string CategoryId { get; set; }
-        public CategoryDto Category { get; set; }
     }
 }

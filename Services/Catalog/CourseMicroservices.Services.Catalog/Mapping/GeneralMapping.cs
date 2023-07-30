@@ -11,6 +11,8 @@ namespace CourseMicroservices.Services.Catalog.Mapping
         public GeneralMapping()
         {
             CreateMap<Course, CreateCourseDto>().ReverseMap();
+
+
             CreateMap<Course, UpdateCourseDto>().ReverseMap();
             CreateMap<Course, CourseDto>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
