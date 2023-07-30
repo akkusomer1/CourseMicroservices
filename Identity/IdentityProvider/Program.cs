@@ -1,7 +1,9 @@
 using IdentityProvider.Models;
+using IdentityProvider.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +22,13 @@ builder.Services.AddDbContext<IdentityAppDbContext>(opt =>
         opt.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);
     });
 });
+
+builder.Services.Configure<CustomTokenOptions>(builder.Configuration.GetSection("TokenOptions"));
+builder.Services.AddSingleton<ICustomTokenOptions>(sp =>
+{
+    return sp.GetRequiredService<IOptions<CustomTokenOptions>>().Value;
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
