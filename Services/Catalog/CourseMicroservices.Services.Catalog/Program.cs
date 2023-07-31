@@ -1,6 +1,8 @@
 using CourseMicroservices.Services.Catalog.Interfaces;
 using CourseMicroservices.Services.Catalog.Services;
 using CourseMicroservices.Services.Catalog.Settings;
+using CourseMicroservices.Shared.Extantion;
+using CourseMicroservices.Shared.Settings;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,7 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 
 builder.Services.Configure<DatabaseSettnings>(builder.Configuration.GetSection(nameof(DatabaseSettnings)));
 
+builder.Services.AddCustomTokenAuth(AudiencesName.CatalogMicroservice);
 
 builder.Services.AddSingleton<IDatabaseSettnings>(sp =>
 {

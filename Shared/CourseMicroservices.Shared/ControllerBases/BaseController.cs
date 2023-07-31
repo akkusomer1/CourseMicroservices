@@ -15,14 +15,14 @@ namespace CourseMicroservices.Shared.ControllerBases
     {
         public IActionResult CreateActionResult<T>(ResponseDto<T> response)
         {
-            if (response.StatusCode==StatusCodes.Status204NoContent)
-            {
-                return new ObjectResult(null)
-                {
-                    StatusCode = response.StatusCode,       
-                };
-            }
-            return new ObjectResult(response.Data)
+            //if (response.StatusCode==StatusCodes.Status204NoContent)
+            //{
+            //    return new ObjectResult(null)
+            //    {
+            //        StatusCode = response.StatusCode,       
+            //    };
+            //}
+            return new ObjectResult(response)
             {
                 StatusCode = response.StatusCode,
             };

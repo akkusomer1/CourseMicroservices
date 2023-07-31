@@ -1,20 +1,26 @@
+using CourseMicroservices.Shared.Services;
 using IdentityProvider.Interfaces;
 using IdentityProvider.Models;
 using IdentityProvider.Services;
 using IdentityProvider.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
-using System.Xml.Schema;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 
+builder.Services.AddDbContext<IdentityAppDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("IdentityLocalDb"), opt =>
+    {
+        opt.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);
+    });
+});
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 {
@@ -28,35 +34,30 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
 }).AddEntityFrameworkStores<IdentityAppDbContext>();
 
 
+
 builder.Services.AddAuthentication(opt =>
 {
-    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
 {
     var tokenOptions = builder.Configuration.GetSection("CustomTokenOptions").Get<CustomTokenOptions>();
 
     opt.TokenValidationParameters = new TokenValidationParameters()
     {
-        ValidAudience = tokenOptions!.Audiences[0],
         ValidIssuer = tokenOptions!.Issuer,
+        ValidAudience = tokenOptions!.Audiences[0],      
         IssuerSigningKey = SignService.GetSymmetricSecurityKey(tokenOptions!.SecurityKey),
-
+        
         ValidateAudience = true,
         ValidateIssuer = true,
         ValidateIssuerSigningKey = true,
         ValidateLifetime = true,
 
-        ClockSkew=TimeSpan.Zero
+        ClockSkew = TimeSpan.Zero
     };
 });
-builder.Services.AddDbContext<IdentityAppDbContext>(opt =>
-{
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("IdentityLocalDb"), opt =>
-    {
-        opt.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name);
-    });
-});
+
 
 builder.Services.AddScoped<IIdentityService, IdentityService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();

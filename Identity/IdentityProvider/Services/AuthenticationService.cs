@@ -1,5 +1,4 @@
-﻿using Azure;
-using CourseMicroservices.Shared.Dtos;
+﻿using CourseMicroservices.Shared.Dtos;
 using IdentityProvider.DTOs;
 using IdentityProvider.Interfaces;
 using IdentityProvider.Models;
@@ -14,11 +13,12 @@ namespace IdentityProvider.Services
         private readonly IdentityAppDbContext _identityContext;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
-        public AuthenticationService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IdentityAppDbContext identityContext)
+        public AuthenticationService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IdentityAppDbContext identityContext, ITokenService tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _identityContext = identityContext;
+            _tokenService = tokenService;
         }
 
         public async Task<ResponseDto<TokenDto>> CreateTokenAsync(LoginDto loginDto)
@@ -55,7 +55,7 @@ namespace IdentityProvider.Services
 
             await _identityContext.SaveChangesAsync();
 
-            return ResponseDto<TokenDto>.Success(_tokenService.CreateToken(user), 200);
+            return ResponseDto<TokenDto>.Success(token, 200);
         }
 
         public async Task<ResponseDto<TokenDto>> CreateTokenByRefreshTokenAsync(string content)
@@ -81,7 +81,7 @@ namespace IdentityProvider.Services
 
         public async Task<ResponseDto<NoContentDto>> RevokeRefreshToken(string content)
         {
-            var existRefreshToken =await _identityContext.RefreshTokens.Where(x => x.Content == content).FirstOrDefaultAsync();
+            var existRefreshToken = await _identityContext.RefreshTokens.SingleOrDefaultAsync(x => x.Content ==content);
 
             if (existRefreshToken == null)
             {

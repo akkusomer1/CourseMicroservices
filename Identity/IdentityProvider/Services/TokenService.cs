@@ -1,4 +1,5 @@
-﻿using IdentityProvider.DTOs;
+﻿using CourseMicroservices.Shared.Services;
+using IdentityProvider.DTOs;
 using IdentityProvider.Interfaces;
 using IdentityProvider.Models;
 using IdentityProvider.Settings;

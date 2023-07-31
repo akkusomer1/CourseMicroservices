@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace IdentityProvider.Services
+namespace CourseMicroservices.Shared.Services
 {
     public class SignService
     {

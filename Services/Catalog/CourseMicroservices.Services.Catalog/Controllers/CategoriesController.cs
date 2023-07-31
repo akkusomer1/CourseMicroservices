@@ -2,6 +2,7 @@
 using CourseMicroservices.Services.Catalog.Dtos.Course;
 using CourseMicroservices.Services.Catalog.Interfaces;
 using CourseMicroservices.Shared.ControllerBases;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseMicroservices.Services.Catalog.Controllers
@@ -15,6 +16,7 @@ namespace CourseMicroservices.Services.Catalog.Controllers
             _categoryService = categoryService;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()=>
              CreateActionResult(await _categoryService.GetAllAsync());
@@ -23,8 +25,8 @@ namespace CourseMicroservices.Services.Catalog.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)=>
              CreateActionResult(await _categoryService.GetByIdAsync(id));
-        
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateCategoryDto createCategoryDto)=>     
              CreateActionResult(await _categoryService.CreateAsync(createCategoryDto));       
