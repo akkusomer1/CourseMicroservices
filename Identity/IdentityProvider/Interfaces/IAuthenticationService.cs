@@ -1,13 +1,12 @@
-﻿using Azure;
+﻿using CourseMicroservices.Shared.Dtos;
 using IdentityProvider.DTOs;
 
 namespace IdentityProvider.Interfaces
 {
-    public class IAuthenticationService
+    public interface IAuthenticationService
     {
-        Task<Response<TokenDto>> CreateTokenAsync(LoginDto loginDto);
-        Task<Response<TokenDto>> CreateTokenByRefreshTokenAsync(string refreshToken);
-        Task<Response<NoDataDto>> RevokeRefreshToken(string refreshToken);
-        Task<Response<ClientTokenDto>> CreateTokenByClient(ClientDto clientLoginDto);
+        Task<ResponseDto<TokenDto>> CreateTokenAsync(LoginDto loginDto);
+        Task<ResponseDto<TokenDto>> CreateTokenByRefreshTokenAsync(string refreshToken);
+        Task<ResponseDto<NoContentDto>> RevokeRefreshToken(string refreshToken);
     }
 }
