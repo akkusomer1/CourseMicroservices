@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<RedisSetttings>(builder.Configuration.GetSection("RedisSetttings"));
 
 //Dikkat ben ServiceProvider üzerinden DI container'a eklenmiþ service'leri alabiliyorum sonuç olarak IOptions<RedisSetttings> 'da D:I eklenmiþtir bunuda alabilirim.
