@@ -79,23 +79,23 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<IdentityAppDbContext>();
-    db.Database.Migrate();
+//using (var scope = app.Services.CreateScope())
+//{
+//    var db = scope.ServiceProvider.GetRequiredService<IdentityAppDbContext>();
+//    db.Database.Migrate();
 
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+//    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
-    if (!userManager.Users.Any())
-    {
-        userManager.CreateAsync(new AppUser
-        {
-            UserName = "akkus11",
-            Email = "akkus11@gmail.com",
-            City = "Malatya",
-        }, "Password12*").Wait();
-    }
-}
+//    if (!userManager.Users.Any())
+//    {
+//        userManager.CreateAsync(new AppUser
+//        {
+//            UserName = "akkus11",
+//            Email = "akkus11@gmail.com",
+//            City = "Malatya",
+//        }, "Password12*").Wait();
+//    }
+//}
 
 
 // Configure the HTTP request pipeline.

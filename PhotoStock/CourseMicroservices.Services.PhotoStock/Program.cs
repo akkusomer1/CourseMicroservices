@@ -1,7 +1,11 @@
+using CourseMicroservices.Shared.Extantion;
+using CourseMicroservices.Shared.Settings;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCustomTokenAuth(AudiencesName.PhotoStockMicroservice);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

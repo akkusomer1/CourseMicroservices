@@ -1,12 +1,16 @@
 ﻿using CourseMicroservices.Services.PhotoStock.Models;
 using CourseMicroservices.Shared.ControllerBases;
 using CourseMicroservices.Shared.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseMicroservices.Services.PhotoStock.Controllers
 {
+    [Authorize] 
     public class PhotosController : BaseController
     {
+     
+        [HttpPost]
         public async Task<IActionResult> PhotoSave(IFormFile photo, CancellationToken cancellationToken)
         {
             if (photo == null || photo.Length <= 0)
@@ -20,15 +24,17 @@ namespace CourseMicroservices.Services.PhotoStock.Controllers
 
             PhotoDto photoDto = new PhotoDto()
             {
-                Url = "Photos" + photo.FileName
+                Url =Path.Combine("Photos", photo.FileName)
             };
 
             return CreateActionResult(ResponseDto<PhotoDto>.Success(photoDto, 200));
         }
 
+       
+        [HttpDelete]
         public IActionResult DeletePhoto(string photoUrl)
         {
-            var path = Path.Combine("wwwroot", photoUrl);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", photoUrl);
             if (!System.IO.File.Exists(path))
                 return CreateActionResult(ResponseDto<NoContentDto>.Fail("Photo Not Found", 404));
 
