@@ -21,27 +21,27 @@ namespace CourseMicroservices.Services.Discount.Services
             _dbConnection = new NpgsqlConnection(_configuration.GetConnectionString("NpgLocalDb"));
         }
 
-        public async Task<ResponseDto<NoContent>> Delete(int id)
+        public async Task<ResponseDto<NoContent>> DeleteAsync(int id)
         {
             var discount = await _dbConnection.QuerySingleOrDefaultAsync<DiscountModel>("select * from discount where id=@Id", new { Id = id });
 
             if (discount == null)
                 return ResponseDto<NoContent>.Fail("Discount Not Found", 404);
 
-            var result = await _dbConnection.ExecuteAsync("Delete from discount where id=@Id");
+            var result = await _dbConnection.ExecuteAsync("Delete from discount where id=@Id", new { Id = id });
 
             return result > 0 ? ResponseDto<NoContent>.Success(200) : ResponseDto<NoContent>.Fail("an error", 500);
         }
 
 
-        public async Task<ResponseDto<List<DiscountModel>>> GetAll()
+        public async Task<ResponseDto<List<DiscountModel>>> GetAllAsync()
         {
             var discounts = await _dbConnection.QueryAsync<DiscountModel>("select * from discount");
 
             return ResponseDto<List<DiscountModel>>.Success(discounts.ToList(), 200);
         }
 
-        public async Task<ResponseDto<DiscountModel>> GetByCodeAndUserId(string code, string userId)
+        public async Task<ResponseDto<DiscountModel>> GetByCodeAndUserIdAsync(string code, string userId)
         {
 
             var discount = await _dbConnection.QueryAsync<DiscountModel>("select * from discount where userid=@UserId and code=@Code", new
@@ -58,7 +58,7 @@ namespace CourseMicroservices.Services.Discount.Services
 
         }
 
-        public async Task<ResponseDto<DiscountModel>> GetById(int id)
+        public async Task<ResponseDto<DiscountModel>> GetByIdAsync(int id)
         {
             var discount = await _dbConnection.QuerySingleOrDefaultAsync<DiscountModel>("select * from discount where Id=@id", new { Id = id });
 
@@ -68,9 +68,9 @@ namespace CourseMicroservices.Services.Discount.Services
             return ResponseDto<DiscountModel>.Success(discount, 200);
         }
 
-        public async Task<ResponseDto<NoContent>> Save(DiscountModel discount)
+        public async Task<ResponseDto<NoContent>> SaveAsync(DiscountModel discount)
         {
-            var insertStatus = await _dbConnection.ExecuteAsync("Insert into discount(userid,rate,code) Values(@UserId,@Rate,@Code)", discount);
+            var insertStatus = await _dbConnection.ExecuteAsync("INSERT INTO discount(userid,rate,code) Values(@UserId,@Rate,@Code)",discount);
 
             if (insertStatus > 0)
                 return ResponseDto<NoContent>.Success(204);
@@ -78,12 +78,12 @@ namespace CourseMicroservices.Services.Discount.Services
             return ResponseDto<NoContent>.Fail("an error accured while adding", 500);
         }
 
-        public async Task<ResponseDto<NoContent>> Update(DiscountModel discount)
+        public async Task<ResponseDto<NoContent>> UpdateAsync(DiscountModel discount)
         {
-            var updateStatus = await _dbConnection.ExecuteAsync("Update discount set userid=@UserId,rate=@Rate,code=@Code where id=@Id)", new
+            var updateStatus = await _dbConnection.ExecuteAsync("Update discount set userid=@UserId,rate=@Rate,code=@Code where id=@Id", new
             {
                 Id = discount.Id,
-                UserId = discount.Userld,
+                UserId = discount.UserId,
                 Rate = discount.Rate,
                 Code = discount.Code,
             });

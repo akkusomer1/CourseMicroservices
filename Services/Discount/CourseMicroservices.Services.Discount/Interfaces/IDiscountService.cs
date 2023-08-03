@@ -6,11 +6,11 @@ namespace CourseMicroservices.Services.Discount.Interfaces
 {
     public interface IDiscountService
     {
-        Task<ResponseDto<List<DiscountModel>>> GetAll();
-        Task<ResponseDto<DiscountModel>> GetById(int id);
-        Task<ResponseDto<NoContent>> Save(DiscountModel discount);
-        Task<ResponseDto<NoContent>> Update(DiscountModel discount);
-        Task<ResponseDto<NoContent>> Delete(int id);
-        Task<ResponseDto<DiscountModel>> GetByCodeAndUserId(string code, string userld);
+        Task<ResponseDto<List<DiscountModel>>> GetAllAsync();
+        Task<ResponseDto<DiscountModel>> GetByIdAsync(int id);
+        Task<ResponseDto<NoContent>> SaveAsync(DiscountModel discount);
+        Task<ResponseDto<NoContent>> UpdateAsync(DiscountModel discount);
+        Task<ResponseDto<NoContent>> DeleteAsync(int id);
+        Task<ResponseDto<DiscountModel>> GetByCodeAndUserIdAsync(string code, string userld);
     }
 }
