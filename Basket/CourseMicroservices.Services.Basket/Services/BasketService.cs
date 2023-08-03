@@ -1,6 +1,9 @@
 ﻿using CourseMicroservices.Services.Basket.DTOs;
 using CourseMicroservices.Services.Basket.Interfaces;
 using CourseMicroservices.Shared.Dtos;
+using CourseMicroservices.Shared.Interfaces;
+using CourseMicroservices.Shared.Services;
+using Microsoft.AspNetCore.Authorization;
 using StackExchange.Redis;
 using System.Text.Json;
 
@@ -10,20 +13,23 @@ namespace CourseMicroservices.Services.Basket.Services
     {
         private readonly RedisService _redisService;
         private readonly IDatabase _db;
-        public BasketService(RedisService redisService)
+        private readonly ISharedIdentityService _sharedIdentityService;
+
+
+        public BasketService(RedisService redisService, ISharedIdentityService sharedIdentityService)
         {
             _redisService = redisService;
+            _sharedIdentityService = sharedIdentityService;
             _db = _redisService.GetDb();
         }
 
-        public async Task<ResponseDto<bool>> Delete(string userId)
+        public async Task<ResponseDto<bool>> DeleteAsync(string userId)
         {
             var result =await _db.KeyDeleteAsync(userId);
-            return result ? ResponseDto<bool>.Success(200) : ResponseDto<bool>.Fail("Basket Not Found", 404);
-
+            return result ? ResponseDto<bool>.Success(true,200) : ResponseDto<bool>.Fail("Basket Not Found", 404);
         }
 
-        public async Task<ResponseDto<BasketDto>> GetBasket(string userId)
+        public async Task<ResponseDto<BasketDto>> GetBasketAsync(string userId)
         {
             var basket = await _db.StringGetAsync(userId);
 
@@ -35,13 +41,12 @@ namespace CourseMicroservices.Services.Basket.Services
 
 
         }
-
-        //StringSet metodu ile hem update hemde Save işlemi yapacağız eğer ilgili key varsa update yapar yoksa yeni save yapar.
-        public async Task<ResponseDto<bool>> SaveOrUpdate(BasketDto basketDto)
+        public async Task<ResponseDto<bool>> SaveOrUpdateAsync(BasketDto basketDto)
         {
+            basketDto.UserId=_sharedIdentityService.GetUserId;
             var result = await _db.StringSetAsync(basketDto.UserId, JsonSerializer.Serialize(basketDto));
-
-            return result ? ResponseDto<bool>.Success( 200) : ResponseDto<bool>.Fail("Basket could not update or save", 500);
+            
+            return result ? ResponseDto<bool>.Success(true,200) : ResponseDto<bool>.Fail("Basket could not update or save", 500);
         }
     }
 }

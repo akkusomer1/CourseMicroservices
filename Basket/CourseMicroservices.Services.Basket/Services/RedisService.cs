@@ -6,7 +6,7 @@ namespace CourseMicroservices.Services.Basket.Services
     {
         private readonly string _host;
         private readonly int _port;
-        private readonly ConnectionMultiplexer _connectionMultiplexer;
+        private  ConnectionMultiplexer _connectionMultiplexer;
         public RedisService(string host, int port)
         {
             _host = host;
@@ -14,7 +14,8 @@ namespace CourseMicroservices.Services.Basket.Services
         }
 
 
-        public void Connect() => ConnectionMultiplexer.Connect($"{_host}:{_port}");
-        public IDatabase GetDb(int db=1) => _connectionMultiplexer.GetDatabase(db);
+        public void Connect()=> _connectionMultiplexer = ConnectionMultiplexer.Connect($"{_host}:{_port}");
+       
+        public IDatabase GetDb(int db = 1) => _connectionMultiplexer.GetDatabase(db);
     }
 }

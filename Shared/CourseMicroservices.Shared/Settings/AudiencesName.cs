@@ -12,6 +12,5 @@ namespace CourseMicroservices.Shared.Settings
         public const string PhotoStockMicroservice = "PhotoStockMicroservice";
         public const string BasketMicroservice = "BasketMicroservice";
         public const string DiscountMicroservice = "DiscountMicroservice";
-  
     }
 }

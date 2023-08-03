@@ -5,8 +5,8 @@ namespace CourseMicroservices.Services.Basket.Interfaces
 {
     public interface IBasketService
     {
-        Task<ResponseDto<BasketDto>> GetBasket(string userId);
-        Task<ResponseDto<bool>> SaveOrUpdate(BasketDto basketDto);
-        Task<ResponseDto<bool>> Delete(string userId);
+        Task<ResponseDto<BasketDto>> GetBasketAsync(string userId);
+        Task<ResponseDto<bool>> SaveOrUpdateAsync(BasketDto basketDto);
+        Task<ResponseDto<bool>> DeleteAsync(string userId);
     }
 }

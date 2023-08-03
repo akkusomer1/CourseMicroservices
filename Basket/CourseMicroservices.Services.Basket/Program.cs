@@ -1,5 +1,10 @@
+using CourseMicroservices.Services.Basket.Interfaces;
 using CourseMicroservices.Services.Basket.Services;
 using CourseMicroservices.Services.Basket.Settings;
+using CourseMicroservices.Shared.Extantion;
+using CourseMicroservices.Shared.Interfaces;
+using CourseMicroservices.Shared.Services;
+using CourseMicroservices.Shared.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -8,11 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.Configure<RedisSetttings>(builder.Configuration.GetSection("RedisSetttings"));
+builder.Services.AddScoped<ISharedIdentityService,SharedIdentityService>();
+builder.Services.AddScoped<IBasketService, BasketService>();
 
-//Dikkat ben ServiceProvider üzerinden DI container'a eklenmiþ service'leri alabiliyorum sonuç olarak IOptions<RedisSetttings> 'da D:I eklenmiþtir bunuda alabilirim.
-//Ve connect metodunu çalýþtýrýyorum.
-builder.Services.AddSingleton<RedisService>(sp =>
+
+builder.Services.Configure<RedisSetttings>(builder.Configuration.GetSection("RedisSettings"));
+
+builder.Services.AddCustomTokenAuth(AudiencesName.BasketMicroservice);
+
+builder.Services.AddScoped<RedisService>(sp =>
 {
     var redisSettings = sp.GetRequiredService<IOptions<RedisSetttings>>().Value;
     var redis = new RedisService(redisSettings.Host, redisSettings.Port);
@@ -34,6 +43,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
