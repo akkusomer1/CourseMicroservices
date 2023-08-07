@@ -56,8 +56,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseMicroservices.Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseMicroservices.Services.Order.Instrastructure", "Services\Order\Instrastructure\CourseMicroservices.Services.Order.Instrastructure\CourseMicroservices.Services.Order.Instrastructure.csproj", "{A5CEEC20-D4AD-49DE-8A09-E1DFF609544A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{FDB35B1E-21C4-47E2-A022-95C8C447F08A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,10 +106,6 @@ Global
 		{A5CEEC20-D4AD-49DE-8A09-E1DFF609544A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5CEEC20-D4AD-49DE-8A09-E1DFF609544A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5CEEC20-D4AD-49DE-8A09-E1DFF609544A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDB35B1E-21C4-47E2-A022-95C8C447F08A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FDB35B1E-21C4-47E2-A022-95C8C447F08A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FDB35B1E-21C4-47E2-A022-95C8C447F08A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FDB35B1E-21C4-47E2-A022-95C8C447F08A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,7 +132,6 @@ Global
 		{A8A396F3-8EFD-40D4-910E-0ACBB3CF094D} = {5A7FD8FC-8870-402E-869E-A153112C90E4}
 		{A636BC16-BEF7-4A81-B537-EFAA54446129} = {FBC9DFA6-45BF-4FFF-83B0-F3D9114CA0FC}
 		{A5CEEC20-D4AD-49DE-8A09-E1DFF609544A} = {F8422DD0-9949-4888-94CA-A15BEB256A6E}
-		{FDB35B1E-21C4-47E2-A022-95C8C447F08A} = {1D55BBE4-5DC1-4A02-A329-DA2C9CF6BB59}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8152AA92-B504-4613-B8A5-C05F7EEAB945}
