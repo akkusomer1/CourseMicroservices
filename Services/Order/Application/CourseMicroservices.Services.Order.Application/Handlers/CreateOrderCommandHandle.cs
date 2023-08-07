@@ -11,6 +11,12 @@ namespace CourseMicroservices.Services.Order.Application.Handlers
     public class CreateOrderCommandHandle : IRequestHandler<CreateOrderCommand, ResponseDto<CreatedOrderDto>>
     {
         private readonly OrderDbContext _context;
+
+        public CreateOrderCommandHandle(OrderDbContext context)
+        {
+            _context = context;
+        }
+
         public async Task<ResponseDto<CreatedOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var newAddress = new Address(request.Address.Province, request.Address.District, request.Address.Street, request.Address.ZipCode, request.Address.Line);
