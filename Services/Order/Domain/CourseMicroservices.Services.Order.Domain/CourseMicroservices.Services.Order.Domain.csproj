@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Shared\CourseMicroservices.Shared\CourseMicroservices.Shared.csproj" />
+    <ProjectReference Include="..\..\Application\CourseMicroservices.Services.Order.Application\CourseMicroservices.Services.Order.Application.csproj" />
     <ProjectReference Include="..\..\Domain.Core\CourseMicroservices.Services.Order.Domain.Core\CourseMicroservices.Services.Order.Domain.Core.csproj" />
+    <ProjectReference Include="..\..\Instrastructure\CourseMicroservices.Services.Order.Instrastructure\CourseMicroservices.Services.Order.Instrastructure.csproj" />
   </ItemGroup>
 
 </Project>
