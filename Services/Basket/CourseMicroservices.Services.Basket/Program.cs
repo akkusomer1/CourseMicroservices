@@ -19,7 +19,7 @@ builder.Services.AddScoped<IBasketService, BasketService>();
 
 builder.Services.Configure<RedisSetttings>(builder.Configuration.GetSection("RedisSettings"));
 
-builder.Services.AddCustomTokenAuth(AudiencesName.BasketMicroservice);
+builder.Services.AddCustomTokenAuth(AudiencesName.BasketMicroservice,TokenVerifyScheme.BasketSchema);
 
 builder.Services.AddScoped<RedisService>(sp =>
 {

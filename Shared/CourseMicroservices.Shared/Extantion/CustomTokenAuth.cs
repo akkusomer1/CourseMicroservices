@@ -14,15 +14,14 @@ namespace CourseMicroservices.Shared.Extantion
 {
     public static class CustomTokenAuth
     {
-        public static void AddCustomTokenAuth(this IServiceCollection Services, string audience)
+        public static void AddCustomTokenAuth(this IServiceCollection Services, string audience, string scheme)
         {
             Services.AddAuthentication(opt =>
             {
-                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
+                opt.DefaultAuthenticateScheme = scheme;
+                opt.DefaultChallengeScheme = scheme;
+            }).AddJwtBearer(scheme, opt =>
             {
-
                 opt.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidIssuer = CustomTokenOptions.Issuer,

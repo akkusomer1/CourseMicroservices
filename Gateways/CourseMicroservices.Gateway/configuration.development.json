@@ -1,4 +1,5 @@
 {
+
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -37,7 +38,11 @@
       ],
       "UpstreamPathTemplate": "/services/basket/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "UpstreamScheme": "http"
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "GatewayMicroserviceSchema",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -50,7 +55,11 @@
       ],
       "UpstreamPathTemplate": "/services/discount/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "UpstreamScheme": "http"
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "GatewayMicroserviceSchema",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -58,16 +67,19 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5015  
+          "Port": 5015
         }
       ],
       "UpstreamPathTemplate": "/services/order/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "UpstreamScheme": "http"
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "GatewayMicroserviceSchema",
+        "AllowedScopes": []
+      }
     }
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:5000"
   }
 }
-

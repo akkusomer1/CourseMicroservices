@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddCustomTokenAuth(AudiencesName.DiscountMicroservice);
+builder.Services.AddCustomTokenAuth(AudiencesName.DiscountMicroservice,TokenVerifyScheme.DiscountSchema);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<ISharedIdentityService,SharedIdentityService>();
 builder.Services.AddScoped<IDiscountService,DiscountService>();

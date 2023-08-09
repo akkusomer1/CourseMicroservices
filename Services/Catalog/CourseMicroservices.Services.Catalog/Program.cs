@@ -13,7 +13,7 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 
 builder.Services.Configure<DatabaseSettnings>(builder.Configuration.GetSection(nameof(DatabaseSettnings)));
 
-builder.Services.AddCustomTokenAuth(AudiencesName.CatalogMicroservice);
+builder.Services.AddCustomTokenAuth(AudiencesName.CatalogMicroservice,TokenVerifyScheme.CatalogSchema);
 
 builder.Services.AddSingleton<IDatabaseSettnings>(sp =>
 {

@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 
-builder.Services.AddCustomTokenAuth(AudiencesName.OrderMicroservice);
+builder.Services.AddCustomTokenAuth(AudiencesName.OrderMicroservice,TokenVerifyScheme.OrderSchema);
 builder.Services.AddMediatR(typeof(GetOrderByUserIdQuery));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
