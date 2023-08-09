@@ -16,7 +16,7 @@ namespace CourseMicroservices.Services.Catalog.Controllers
             _categoryService = categoryService;
         }
 
-        [Authorize]
+        
         [HttpGet]
         public async Task<IActionResult> GetAll()=>
              CreateActionResult(await _categoryService.GetAllAsync());
