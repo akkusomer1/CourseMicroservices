@@ -13,7 +13,7 @@ namespace CourseMicroservices.Shared.ControllerBases
     [ApiController]
     public class BaseController:ControllerBase
     {
-        public IActionResult CreateActionResult<T>(ResponseDto<T> response)
+        public IActionResult CreateActionResult<T>(ResponseDto<T> response) where T : class
         {
             //if (response.StatusCode==StatusCodes.Status204NoContent)
             //{

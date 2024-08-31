@@ -4,6 +4,7 @@ using IdentityProvider.Interfaces;
 using IdentityProvider.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace IdentityProvider.Services
 {
@@ -57,7 +58,7 @@ namespace IdentityProvider.Services
 
             return ResponseDto<TokenDto>.Success(token, 200);
         }
-
+         
         public async Task<ResponseDto<TokenDto>> CreateTokenByRefreshTokenAsync(string content)
         {
             var refreshToken = await _identityContext.RefreshTokens.SingleOrDefaultAsync(x => x.Content == content);
@@ -81,7 +82,7 @@ namespace IdentityProvider.Services
 
         public async Task<ResponseDto<NoContentDto>> RevokeRefreshToken(string content)
         {
-            var existRefreshToken = await _identityContext.RefreshTokens.SingleOrDefaultAsync(x => x.Content ==content);
+            var existRefreshToken = await _identityContext.RefreshTokens.SingleOrDefaultAsync(x => x.Content == content);
 
             if (existRefreshToken == null)
             {
